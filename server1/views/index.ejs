@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho OAuth</title>
+</head>
+<body>
+    <h1>Zoho OAuth Flow</h1>
+    <form action="/oauth/authorize" method="POST">
+        <label for="client_id">Client ID:</label>
+        <input type="text" name="client_id" id="client_id" required><br><br>
+        
+        <label for="client_secret">Client Secret:</label>
+        <input type="text" name="client_secret" id="client_secret" required><br><br>
+        
+        <label for="redirect_uri">Redirect URI:</label>
+        <input type="text" name="redirect_uri" id="redirect_uri" required><br><br>
+        
+        <label for="scope">Scope:</label>
+        <input type="text" name="scope" id="scope" required><br><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
