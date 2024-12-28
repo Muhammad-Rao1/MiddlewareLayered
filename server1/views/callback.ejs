@@ -15,5 +15,12 @@
     <h1>Account server </h1>
     <p>Your server is:</p>
     <p><strong><%= accounts %></strong></p>
+    
+    <form action="/oauth/get-tokens" method="POST">
+        <input type="hidden" name="authorizationCode" value="<%= authorizationCode %>">
+        <input type="hidden" name="location" value="<%= location %>">
+        <input type="hidden" name="accounts" value="<%= accounts %>">
+        <button type="submit">Get Tokens</button>
+    </form>
 </body>
 </html>

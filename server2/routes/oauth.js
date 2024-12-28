@@ -1,7 +1,9 @@
 const { render } = require('ejs');
 const express = require('express');
+const axios = require('axios');
+
 const router = express.Router();
-const { ZOHO_AUTH_URL, REDIRECT_URI } = process.env;
+const { ZOHO_AUTH_URL, REDIRECT_URI,ZOHO_TOKEN_URL } = process.env;
 
 router.post('/authorize', (req, res) => {
     const { client_id, client_secret, redirect_uri, scope } = req.body;
@@ -40,4 +42,29 @@ router.get('/callback', (req, res) => {
 
 });
 
+router.post('/get-tokens', async (req, res) => {
+    try {
+        const { authorizationCode,client_id,client_secret} = req.body;
+
+        // Make POST request to Zoho's token endpoint
+        const tokenResponse = await axios.post(ZOHO_TOKEN_URL, null, {
+            params: {
+                client_id: client_id,
+                client_secret: client_secret,
+                grant_type: 'authorization_code',
+                code: authorizationCode,
+                redirect_uri: REDIRECT_URI,
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+
+        // Send tokens back to Server 1
+        res.json(tokenResponse.data);
+    } catch (error) {
+        console.error('Error exchanging authorization code for tokens:', error.message);
+        res.status(500).json({ error: 'Failed to retrieve tokens.' });
+    }
+});
 module.exports = router;
