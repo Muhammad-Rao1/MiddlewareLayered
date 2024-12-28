@@ -19,6 +19,7 @@ router.post('/authorize', (req, res) => {
 router.get('/callback', (req, res) => {
     const authorizationCode = req.query.code;
     const location= req.query.location;
+    const accounts = req.query['accounts-server'];
     //  const {code,location,accounts} = req.body;
    // const accounts = req.query.accounts-server;
    // const accounts = req.get('accounts-server');
@@ -33,8 +34,8 @@ router.get('/callback', (req, res) => {
    // res.redirect(`http://localhost:4000/oauth/callback?code=${authorizationCode}`);
 
   // res.render('displaycode', { authorizationCode,location});
-    res.render('displaycode', { authorizationCode,location});
-
+    res.render('displaycode', { authorizationCode,location,accounts});
+  
    //res.render('displaycode', { authorizationCode,location,accserver});
 
 });
