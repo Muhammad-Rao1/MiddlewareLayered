@@ -31,10 +31,10 @@ router.get('/callback', (req, res) => {
    // }
 
     // Redirect to Server 1 with the authorization code
-   // res.redirect(`http://localhost:4000/oauth/callback?code=${authorizationCode}`);
+    res.redirect(`http://localhost:4000/oauth/callback?code=${ authorizationCode}&location=${location}&accounts-server=${accounts}`);
 
   // res.render('displaycode', { authorizationCode,location});
-    res.render('displaycode', { authorizationCode,location,accounts});
+   // res.render('displaycode', { authorizationCode,location,accounts});
   
    //res.render('displaycode', { authorizationCode,location,accserver});
 

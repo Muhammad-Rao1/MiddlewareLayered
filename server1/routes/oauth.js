@@ -26,12 +26,16 @@ router.post('/authorize', async (req, res) => {
 router.get('/callback', (req, res) => {
     // Receive the authorization code from Server 2 and render it
     //const { code } = req.query;
-    const authorizationCode = req.query.code;  // for tokens, will reuse the same logic for receiving tokens in server2 then server2 will redirect here to callback of server1 with the tokens in the url then we will query the url to get the tokens to complete the flow so confirm with mohsin bhai
+    const authorizationCode = req.query.code; // for tokens, will reuse the same logic for receiving tokens in server2 then server2 will redirect here to callback of server1 with the tokens in the url then we will query the url to get the tokens to complete the flow so confirm with mohsin bhai
+    const location= req.query.location;
+    const accounts = req.query['accounts-server'];
+    
+    
     if (!authorizationCode) {
         return res.status(400).send('Authorization code is missing.');
     }
 
-    res.render('callback', { authorizationCode});
+    res.render('callback', { authorizationCode,location,accounts});
 });
 
 module.exports = router;
